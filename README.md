@@ -57,7 +57,7 @@ Key features:
     pip install -r requirements.txt
     ```
     
-    > Make sure `transformers`, `torch`, `flask` are included in `requirements.txt`.
+    > Make sure `transformers`, `torch`, `flask` are included in `requirements.txt`. (should be but check)
 
 ---
 
