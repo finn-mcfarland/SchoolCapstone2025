@@ -100,6 +100,6 @@ Expected JSON response:
 ## Notes
 
 - The model uses a publicly available BERT checkpoint (`unitary/toxic-bert`) which can be replaced with a fine-tuned version later.
-- the outcome should always be 'not cyberbulling' becasue we are not using a fine tuned model
+- the outcome should always be 'not cyberbulling' because we are not using a fine tuned model
 - The app runs in Flask’s development mode; for production deployment, a WSGI server is recommended.
 - Make sure to test the `/predict` endpoint with various texts to understand model behavior. after we implement an actual fine tuned model
