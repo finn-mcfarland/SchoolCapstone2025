@@ -20,10 +20,10 @@ df["Classification"] = df["Classification"].map(label_map)
 
 def clean_text(text):
     text = text.lower()
-    text = re.sub(r"http\S+", "", text)  # Remove URLs
-    text = re.sub(r"@\w+", "", text)     # Remove @mentions
-    text = re.sub(r"#\w+", "", text)     # Remove hashtags
-    text = re.sub(r"[^a-z\s]", "", text) # Remove punctuation/numbers
+    text = re.sub(r"http\S+", "", text)  #URLs
+    text = re.sub(r"@\w+", "", text)     # @mentions
+    text = re.sub(r"#\w+", "", text)     # hashtags
+    text = re.sub(r"[^a-z\s]", "", text) #punctuation/numbers
     return text.strip()
 
 df["Comment"] = df["Comment"].astype(str).apply(clean_text)
@@ -42,7 +42,7 @@ sequences = tokenizer.texts_to_sequences(texts)
 x = pad_sequences(sequences, maxlen=maxlen)
 y = np.array(labels)
 
-# === Use sklearn's train_test_split ===
+# traintest split
 x_train, x_val, y_train, y_val = train_test_split(
     x, y, test_size=0.2, stratify=y, random_state=42
 )

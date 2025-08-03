@@ -23,5 +23,5 @@ while True:
     padded = pad_sequences(seq, maxlen=maxlen)
     pred = model.predict(padded)[0][0]
 
-    label = "Cyberbullying" if pred > 0.5 else "Not Cyberbullying"
+    label = "Cyberbullying" if pred > 0.96 else "Not Cyberbullying"
     print(f"Prediction: {label} ({pred:.2f} confidence)\n")
