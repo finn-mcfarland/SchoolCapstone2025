@@ -3,14 +3,14 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 import pickle
 
-# === Load model and tokenizer ===
+#load the model
 model = load_model("cyberbullying_model.h5")
 
-# Load the tokenizer (must be saved during training)
+#load the tokeniser for decoding
 with open("tokenizer.pkl", "rb") as f:
     tokenizer = pickle.load(f)
 
-maxlen = 100  # Must match training
+maxlen = 100 #must match the value in training.py
 
 print("Enter text to classify (type 'exit' to quit):\n")
 
