@@ -2,10 +2,9 @@ from transformers import BertTokenizer, BertForSequenceClassification
 import torch
 import torch.nn.functional as F
 
-def load_model(model_path='unitary/toxic-bert'):  # <--- public model
+def load_model(model_path='unitary/toxic-bert'):  # Use a public model for testing
     tokenizer = BertTokenizer.from_pretrained(model_path)
     model = BertForSequenceClassification.from_pretrained(model_path)
-    model_path = "./fine_tuned_model"
     model.eval()
     return model, tokenizer
 
