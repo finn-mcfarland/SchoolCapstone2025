@@ -6,7 +6,7 @@ import torch
 model = AutoModelForSequenceClassification.from_pretrained("./cyberbully_detector")
 tokenizer = AutoTokenizer.from_pretrained("./cyberbully_detector")
 
-labels = ["Bullying", "Not Bullying"]  # Check this ordering carefully!
+labels = ["Not Bullying", "Bullying"] 
 
 def classify(text):
     inputs = tokenizer([text], return_tensors="pt", truncation=True, padding=True)
