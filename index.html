@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mock Comment Section</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    .comment { margin-bottom: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 5px; }
+    .bullying { background-color: #ffcccc; }
+    .not-bullying { background-color: #ccffcc; }
+  </style>
+</head>
+<body>
+  <h2>Mock Comment Section</h2>
+  <input type="text" id="commentInput" placeholder="Type a comment..." />
+  <button onclick="postComment()">Post</button>
+  <div id="comments"></div>
+
+  <script>
+    async function postComment() {
+      const input = document.getElementById("commentInput");
+      const comment = input.value;
+      input.value = "";
+
+      const response = await fetch("http://127.0.0.1:8000/classify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ comment: comment })
+      });
+
+      const data = await response.json();
+
+      const div = document.createElement("div");
+      div.className = "comment " + (data.result === "Bullying" ? "bullying" : "not-bullying");
+      div.innerText = data.comment + " -> " + data.result;
+
+      document.getElementById("comments").appendChild(div);
+    }
+  </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import torch
 model = AutoModelForSequenceClassification.from_pretrained("./cyberbully_detector")
 tokenizer = AutoTokenizer.from_pretrained("./cyberbully_detector")
 
-labels = ["Not Bullying", "Bullying"] 
+labels = ["Bullying", "Not Bullying"] 
 
 def classify(text):
     inputs = tokenizer([text], return_tensors="pt", truncation=True, padding=True)
@@ -16,4 +16,4 @@ def classify(text):
     return labels[prediction], {labels[i]: float(probs[0][i]) for i in range(len(labels))}
 
 iface = gr.Interface(fn=classify, inputs="text", outputs=["label", "json"])
-iface.launch()
+iface.launch(share=True)
