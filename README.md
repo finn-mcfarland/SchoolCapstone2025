@@ -3,6 +3,8 @@ The 2025 Capstone project
 
 # Cyberbullying Detection Web App
 
+Use python version 3.9.6 and pip3 :)
+
 ## Overview
 
 This project provides a simple web application for detecting cyberbullying in user-submitted comments. It combines a lightweight sequence classification model with a FastAPI backend and an HTML/JavaScript frontend that simulates a comment section. The system flags potentially harmful or bullying content based on model predictions.
