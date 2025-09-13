@@ -1,48 +1,46 @@
 # SchoolCapstone2025
 The 2025 Capstone project
 
-https://ieeexplore.ieee.org/document/9908898 - access 30/jul/2025
-
-accessed 31/jul/2025:
-https://www.kaggle.com/datasets/saurabhshahane/cyberbullying-dataset
-https://data.mendeley.com/datasets/wmx9jj2htd/2
-https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification?resource=download
-
-
-
-# Cyberbully Detector Flask App
+# Cyberbullying Detection Web App
 
 ## Overview
 
-This project adds an **Autonomous Cyberbullying Detection API** built with Flask and a BERT-based model. The app exposes an endpoint for predicting whether a given text contains cyberbullying content.
+This project provides a simple web application for detecting cyberbullying in user-submitted comments. It combines a lightweight sequence classification model with a FastAPI backend and an HTML/JavaScript frontend that simulates a comment section. The system flags potentially harmful or bullying content based on model predictions.
 
-Key features:
+## Features
 
-- Loads a pre-trained BERT model (`unitary/toxic-bert`) for text classification
-- Provides a `/predict` POST endpoint accepting JSON input with text
-- Returns prediction label (`Cyberbullying` or `Not Cyberbullying`) and confidence score
-- Structured using Flask Blueprints for modularity
----
-
-## What Was Added
-
-- `model.py`:  
-    Implements model loading and text prediction using HuggingFace transformers and PyTorch.
-    
-- `routes.py`:  
-    Defines the Flask Blueprint with the `/predict` route for inference and a simple root route to confirm the API is running.
-    
-- Updated `__init__.py` to register the blueprint and create the Flask app.
-    
-- `run.py`:  
-    Entry point to launch the Flask development server.
-    
+- Text classification model trained to detect cyberbullying vs non-bullying comments  
+- FastAPI backend serving a REST API (`/classify`) that runs the model on new inputs  
+- Frontend (HTML/JS) that provides a mock comment section where users can type comments and receive immediate feedback  
+- Configurable detection threshold so you can control sensitivity  
 
 ---
+
+## The Files
+
+- `Transformer.py`:  
+    Training and data cleaning - current model is trained at 10 epochs
+    
+- `website_test.py`:  
+    launches a gradio app with a minimal ui for this detector
+        
+- `testpredict.py`:  
+    includes a variable that is a list of inputs to test, no website, runs in IDE
+
+- `app.py` and `index.html`:
+    the final website setup, guide for use below
+
+--- 
 
 ## How to Use
 
-### Setup
+### Installation
+
+Clone this repository and install dependencies in a Python environment (Python 3.8+ recommended):
+```bash
+    git clone https://github.com/finn-mcfarland/SchoolCapstone2025.git
+    cd cyberbullying-detector
+```
 
 1. Create and activate a Python virtual environment (recommended):
     
@@ -54,52 +52,51 @@ Key features:
 2. Install dependencies:
     
     ```bash
-    pip install -r requirements.txt
+    pip install -r fastapi==0.115.0 uvicorn==0.30.6 transformers==4.44.2 torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 python-multipart==0.0.9
     ```
+
+3. Running the Server
+```bash
+    python3 -m uvicorn app:app --reload
+```
+The server will run on:
+
+http://127.0.0.1:8000
+
+4. Frontend
+
+    Open index.html in your browser. It contains a simple mock comment section where users can type a message. Submissions are sent to the FastAPI backend, which returns the classification result.
+        
+    If the comment is classified as bullying (above threshold), it will be highlighted as such
     
-    > Make sure `transformers`, `torch`, `flask` are included in `requirements.txt`. (should be but check)
+    How It Works
 
----
+    Model
+    A sequence classification model (fine-tuned transformer) is loaded from Hugging Face Transformers.
+    It takes text as input and produces logits for two classes:
 
-### Running the App
+        Class 0 = Not Bullying
 
-make sure to be in the folder of the 'run.py' file 
-```bash
-python run.py
-```
+        Class 1 = Bullying
 
-The app will start on:  
-`http://127.0.0.1:5000`
+    Classification
 
-Visit this URL in a browser to see the root message confirming the server is running.
+        The backend applies a softmax to convert logits into probabilities
 
----
+        By default, the higher probability class is returned
 
-### Testing the Prediction Endpoint
+        An optional detection threshold can be applied to require higher confidence before labeling as bullying
 
-Send a POST request to `/predict` with JSON body containing a `text` field. For example:
+Dependencies
+FastAPI – web framework for serving the API
+Uvicorn – ASGI server to run FastAPI
+Transformers – pretrained NLP models
+Torch - deep learning backend for Transformers
 
-```bash
-curl -X POST http://127.0.0.1:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"text": "You are an idiot"}'
-```
+References
+https://ieeexplore.ieee.org/document/9908898 - access 30/jul/2025
 
-Expected JSON response:
-
-```json
-{
-  "text": "You are an idiot",
-  "prediction": "Not Cyberbullying",
-  "confidence": 0.91
-}
-``` 
-
----
-
-## Notes
-
-- The model uses a publicly available BERT checkpoint (`unitary/toxic-bert`) which can be replaced with a fine-tuned version later.
-- the outcome should always be 'not cyberbulling' because we are not using a fine tuned model
-- The app runs in Flask’s development mode; for production deployment, a WSGI server is recommended.
-- Make sure to test the `/predict` endpoint with various texts to understand model behavior. after we implement an actual fine tuned model
+accessed 31/jul/2025:
+https://www.kaggle.com/datasets/saurabhshahane/cyberbullying-dataset
+https://data.mendeley.com/datasets/wmx9jj2htd/2
+https://www.kaggle.com/datasets/andrewmvd/cyberbullying-classification?resource=download
