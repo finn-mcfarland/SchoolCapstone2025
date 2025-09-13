@@ -3,7 +3,8 @@ The 2025 Capstone project
 
 # Cyberbullying Detection Web App
 
-Use python version 3.9.6 and pip3 :)
+Use python version 3.9.6 and pip :)
+assumes your path is set up correctly
 
 ## Overview
 
@@ -47,19 +48,27 @@ Clone this repository and install dependencies in a Python environment (Python 3
 1. Create and activate a Python virtual environment (recommended):
     
     ```bash
-    python3 -m venv venv
+    python -m venv venv
+    ```
+    OSX:
+    ```bash
     source venv/bin/activate
     ```
+   or
+   Windows/Linux:
+   ```bash
+   venv\Scripts\activate
+   ```
     
-2. Install dependencies:
-    
+3. Install dependencies:
+    there are probably other versions that work, but i Know these ones do on python 3.9.6
     ```bash
     pip install fastapi==0.115.0 uvicorn==0.30.6 transformers==4.44.2 torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 python-multipart==0.0.9
     ```
 
-3. Running the Server
+4. Running the Server
 ```bash
-    python3 -m uvicorn app:app --reload
+    python -m uvicorn app:app --reload
 ```
 The server will run on:
 
