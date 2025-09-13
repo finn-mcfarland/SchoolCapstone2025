@@ -39,7 +39,7 @@ This project provides a simple web application for detecting cyberbullying in us
 Clone this repository and install dependencies in a Python environment (Python 3.8+ recommended):
 ```bash
     git clone https://github.com/finn-mcfarland/SchoolCapstone2025.git
-    cd SchoolCapstone2025/cyberbully_detector
+    cd SchoolCapstone2025
 ```
 
 1. Create and activate a Python virtual environment (recommended):
@@ -52,7 +52,7 @@ Clone this repository and install dependencies in a Python environment (Python 3
 2. Install dependencies:
     
     ```bash
-    pip install -r fastapi==0.115.0 uvicorn==0.30.6 transformers==4.44.2 torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 python-multipart==0.0.9
+    pip install fastapi==0.115.0 uvicorn==0.30.6 transformers==4.44.2 torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 python-multipart==0.0.9
     ```
 
 3. Running the Server
