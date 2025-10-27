@@ -5,7 +5,6 @@ The 2025 Capstone project
 
 Use python version 3.9.6 and pip :)
 assumes your PATH is set up correctly
-if you're on mac you'll obviously be using python3/pip3 and if you're on windows just python/pip
 
 ## Overview
 
