@@ -46,7 +46,8 @@ Clone this repository and install dependencies in a Python environment (Python 3
 ```
 
 1. Create and activate a Python virtual environment (recommended):
-    MACOS/Linux:
+
+   MACOS/Linux:
     ```bash
     python3 -m venv venv
     source venv/bin/activate
