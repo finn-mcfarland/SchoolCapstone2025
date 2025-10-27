@@ -5,6 +5,7 @@ The 2025 Capstone project
 
 Use python version 3.9.6 and pip :)
 assumes your PATH is set up correctly
+if you're on mac you'll obviously be using python3/pip3 and if you're on windows just python/pip
 
 ## Overview
 
@@ -46,27 +47,32 @@ Clone this repository and install dependencies in a Python environment (Python 3
 ```
 
 1. Create and activate a Python virtual environment (recommended):
-    
+    MACOS/Linux:
     ```bash
-    python -m venv venv
-    ```
-    OSX:
-    ```bash
+    python3 -m venv venv
     source venv/bin/activate
     ```
-   or
-   Windows/Linux:
-   ```bash
-   venv\Scripts\activate
-   ```
-    
+    Windows:
+    ```bash
+    python -m venv venv
+    venv\Scripts\activate
+    ```
+
 3. Install dependencies:
     there are probably other versions that work, but i Know these ones do on python 3.9.6
    you might have to update torch depending on your system?
     ```bash
-    pip install fastapi==0.115.0 uvicorn==0.30.6 transformers==4.44.2 torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 python-multipart==0.0.9
+    pip install --upgrade pip setuptools wheel
+    pip install fastapi==0.115.0 uvicorn==0.30.6
+    pip install transformers==4.44.2 torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1
+    pip install python-multipart==0.0.9
+    pip install safetensors==0.4.5
     ```
-    
+    If you encounter OpenSSL warnings:
+   ```bash
+    pip install urllib3==1.26.18
+    export SSL_CERT_FILE=$(python -m certifi)
+   ```
 
 5. Running the Server
 ```bash
